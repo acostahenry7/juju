@@ -24,6 +24,10 @@ async function get(table, id) {
   return col.filter((item) => item.id === id)[0] || null;
 }
 async function upsert(table, data) {
+  if (!db[table]) {
+    db[table] = [];
+  }
+
   db[table].push(data);
   return await list(table);
 }
